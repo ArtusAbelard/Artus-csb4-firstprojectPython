@@ -82,10 +82,15 @@ class Heros(Personnage):
     def dormir(self):
         if self.OR >= 10:
             self.pv=200
+            print("vous avez reganer tout vos pv , pv actuel : " + str(self.pv) + " pv")
         else :
             print("vous n avez pas assez d or")
 
-    # def magasin(self):
+    def magasin(self):
+        print("voici tout les produits : ")
+        for x in produits :
+            print(x["name"])
+            print("")
 
 # print(produits[0]["name"])
 
@@ -94,19 +99,26 @@ choseclass = "mage"
 
 monHeros= Heros(nom="artus",classe=choseclass,pv=200,force=30,xp=0,OR=0,lvl=0,defense=20,inventaire=[],distance=0,lieu="foret",event="")
 
-# monHeros.explorer()
-# print(inventaire) 
-# print(monHeros.event)
-# print("❤✔👮‍♂️")
-# print(monHeros.inventaire[0]["name"])
 choix=""
+actionvillage=""
 
 while monHeros.pv>0:
     while choix != "village" :
         print("✨ Bienvenu vous arrivez dans la foret ✨")
         monHeros.explorer()
-        choix=str(input("voulez vous explorer ou partir au village ?"))
-        
+        choix=str(input("voulez vous explorer ou partir au village ? "))
+
+    while choix != "foret" : 
+        print("✨ Bienvenu au village ✨")
+        monHeros.village()
+        actionvillage = str(input("que voulez vous faire dormir ou regarder les produits ? "))
+        if actionvillage == "dormir":
+            monHeros.dormir()
+        elif actionvillage == "produits":
+            monHeros.magasin()
+
+        choix=str(input("voulez vous aller dans la foret ou partir au village ? "))
+
     
 
     
